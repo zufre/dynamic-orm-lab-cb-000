@@ -89,9 +89,3 @@ describe Student do
     end
   end
 end
-
-  # describe '#table_name_for_insert' do 
-  #   it '' do 
-  #     expect().to eq()
-  #   end
-  # end
