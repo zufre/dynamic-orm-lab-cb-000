@@ -1,6 +1,22 @@
 require_relative 'spec_helper'
 
 describe Student do
+  before :each do
+    DB = {:conn => SQLite3::Database.new("db/students.db")}
+    DB[:conn].execute("DROP TABLE IF EXISTS students")
+
+    sql = <<-SQL
+      CREATE TABLE IF NOT EXISTS students (
+      id INTEGER PRIMARY KEY, 
+      name TEXT, 
+      grade INTEGER
+      )
+    SQL
+
+    DB[:conn].execute(sql)
+    DB[:conn].results_as_hash = true
+  end
+
   let(:attributes) {
     {
       id: nil,
@@ -10,6 +26,12 @@ describe Student do
   }
 
   let(:new_student) {Student.new(attributes)}
+
+  describe 'inheritance' do
+    it 'inherits from InteractiveRecord class' do
+      expect(Student).to be < InteractiveRecord 
+    end
+  end
 
   describe '.table_name' do 
     it 'creates a downcased, plural table name based on the Class name' do 
@@ -77,7 +99,7 @@ describe Student do
 
       it 'sets the student\'s id' do
         new_student.save
-        expect(new_student.id).to eq(2)
+        expect(new_student.id).to eq(1)
       end
     end
   end
@@ -85,7 +107,7 @@ describe Student do
   describe '.find_by_name' do 
     it 'executes the SQL to find a row by name' do 
       Student.new({name: "Jan", grade: 10}).save
-      expect(Student.find_by_name("Jan")).to eq([{"id"=>3, "name"=>"Jan", "grade"=>10, 0=>3, 1=>"Jan", 2=>10}])
+      expect(Student.find_by_name("Jan")).to eq([{"id"=>1, "name"=>"Jan", "grade"=>10, 0=>1, 1=>"Jan", 2=>10}])
     end
   end
 end
