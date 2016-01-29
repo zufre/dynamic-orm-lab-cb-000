@@ -25,4 +25,4 @@ Your `Student` class lives in `lib/student.rb`. This class will inherit from `In
 Note: The only code the `Student` class needs to contain is the code to create the `attr_accessor`s specific to itself. But even that code uses a method, `#column_names`, inherited from the super class. 
 
 This is a test-driven lab, so run the specs and get them to pass.
-<a href='https://learn.co/lessons/dynamic-orm-lab' data-visibility='hidden'>View this lesson on Learn.co</a>
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/dynamic-orm-lab' title='Dynamic ORM Lab'>Dynamic ORM Lab</a> on Learn.co and start learning to code for free.</p>
